@@ -11,3 +11,9 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField()
+
+
+class Match(models.Model):
+    client = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='matches')
+    liked_client = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='liked_by')
+    email_sent = models.BooleanField(default=False)
