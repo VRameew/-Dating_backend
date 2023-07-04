@@ -1,4 +1,4 @@
 
-login = 'v.rameew@gmail.com'
+login = 'test@gmail.com'
 
-password = 'Stalker_26_russ'
+password = '123'
