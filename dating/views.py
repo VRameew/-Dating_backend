@@ -31,3 +31,19 @@ def match_client(request, id):
         match.save()
         return Response({'message': f'Вы понравились {liked_client.first_name}! Почта участника: {liked_client.email}'})
     return Response(status=204)
+
+
+@api_view(['GET'])
+def client_list(request):
+    queryset = CustomUser.objects.all()
+    gender = request.query_params.get('gender')
+    name = request.query_params.get('name')
+    surname = request.query_params.get('surname')
+    if gender:
+        queryset = queryset.filter(gender=gender)
+    if name:
+        queryset = queryset.filter(first_name__icontains=name)
+    if surname:
+        queryset = queryset.filter(last_name__icontains=surname)
+    serializer = CustomUserValidator(queryset, many=True)
+    return Response(serializer.data)
