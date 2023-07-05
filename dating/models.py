@@ -14,6 +14,9 @@ class CustomUser(AbstractUser):
     longitude = models.FloatField()
     latitude = models.FloatField()
 
+    groups = "CustomUser"
+    user_permissions = "CustomUser"
+
 
 class Match(models.Model):
     client = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='matches')

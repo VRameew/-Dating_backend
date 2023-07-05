@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import CustomUser, Match
+from dating.models import CustomUser, Match
 
 
 class CustomUserValidator(serializers.ModelSerializer):
