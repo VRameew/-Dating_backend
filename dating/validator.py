@@ -5,8 +5,7 @@ from dating.models import CustomUser, Match
 class CustomUserValidator(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'avatar', 'gender',
-                  'first_name', 'last_name', 'email']
+        fields = '__all__'
 
 
 class MatchSerializer(serializers.ModelSerializer):
