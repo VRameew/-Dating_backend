@@ -11,6 +11,8 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField()
+    longitude = models.FloatField()
+    latitude = models.FloatField()
 
 
 class Match(models.Model):

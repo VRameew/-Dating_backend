@@ -5,6 +5,7 @@ from dating.watermarker import watermark_text
 from django.shortcuts import get_object_or_404
 from dating.models import CustomUser, Match
 from dating.emailsender import email_sender
+from dating.DistanceBetweenPoints import getDistanceBetweenPointsNew
 
 
 # Create your views here.
@@ -47,3 +48,17 @@ def client_list(request):
         queryset = queryset.filter(last_name__icontains=surname)
     serializer = CustomUserValidator(queryset, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def nearby_clients(request, id, distance):
+    client = get_object_or_404(CustomUser, id=id)
+    longitude_client = client.longitude
+    latitude_client = client.latitude
+    nearby_users = []
+    for user in CustomUser.objects.all():
+        distance_to_user = getDistanceBetweenPointsNew(
+            latitude_client, longitude_client, user.latitude, user.longitude)
+        if distance <= distance_to_user:
+            nearby_users.append(user)
+    return Response(nearby_users)
